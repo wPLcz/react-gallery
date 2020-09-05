@@ -9,6 +9,9 @@ node_modules
 test
 dist
 
+#KEYS CREDENTIALS
+*.env
+
 # BD, logs
 *.log
 *.sql

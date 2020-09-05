@@ -4,10 +4,13 @@ const path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: "./src/index.js",
+  entry: path.join(__dirname, "/src/index.js"),
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "index.js"
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   },
   module: {
     rules: [

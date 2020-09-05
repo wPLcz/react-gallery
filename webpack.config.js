@@ -4,10 +4,13 @@ const path = require("path");
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.js",
+  entry: path.join(__dirname, "/src/index.js"),
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "index.js"
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   },
   module: {
     rules: [
@@ -45,7 +48,9 @@ module.exports = {
   },
   devServer: {
     open: "firefox",
-    hot: true
+    hot: true,
+    historyApiFallback: true,
+    overlay: true,
   },
   plugins: [
     new CleanWebpackPlugin(),
