@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 const path = require("path");
 
 module.exports = {
@@ -45,6 +46,11 @@ module.exports = {
         ]
       }
     ]
+  },
+  alias: { 'react-dom': '@hot-loader/react-dom'  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
   plugins: [
     new CleanWebpackPlugin(),

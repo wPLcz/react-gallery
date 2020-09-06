@@ -1,5 +1,7 @@
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 const path = require("path");
 
 module.exports = {
@@ -53,6 +55,8 @@ module.exports = {
     overlay: true,
   },
   plugins: [
+    new Dotenv(),
+    new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
       template: "./index.html",
