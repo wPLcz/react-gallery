@@ -12,7 +12,7 @@ export function executeAppCallAsync(fn) {
         if (error.response && error.response.status === 401) {
           window.location.reload();
         } else {
-          yield put(app.requestFailed(error));
+         console.error('requestFailed');
         }
       }
       isExecuting = false;

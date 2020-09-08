@@ -1,32 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled  from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Button = (props) => {
   return (
-    <StyledButton onClick={() => props.takeNewestSorting(props.id)}>
+    <StyledButton active={props.active} onClick={() => props.takeNewestSorting(props.id)}>
       {props.children}
     </StyledButton>)
 };
 
 const StyledButton = styled.button`
+    padding: 0;
     margin: 0 15px;
     border: none;
     background-color: transparent;
+    position: relative;
+    text-align: center;
     cursor: pointer;
-    color: ${props => props.active ? 'red' : '#999'};
-    font-size: 24px;
+    color: ${({ active }) =>  active  ? '#CB626E;' : '#999'};
+    font-size: 14px;
     font-family: Helvetica;
     text-transform: uppercase;
-    box-sizing: content-box;
     
-    @media (min-width: 1200px) {
-      //margin: 0 0 0 2vw;
-      //text-align: left;
+    &::after {
+    position: absolute;
+    display: block;
+    content: '';
+    bottom: -10px;
+    background-color: ${({ active }) =>  active ? '#CB626E;' : '#999'};
+    width: 0%;
+    height: 2px;
+    transition: width 250ms ease-in-out;
+    }
+
+    &:hover {
+      &::after {
+        width: 100%;
+      }   
     }
     
-    &:hover {
-      
+    @media (min-width: 960px) {
+      margin: 0 25px;
+      font-size: 24px;
     }
 `;
 

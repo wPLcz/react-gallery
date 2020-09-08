@@ -1,19 +1,32 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { connect, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { v4 as uuidv4 } from 'uuid';
 import { actions } from '../store/reducers/singleGalleryPage';
-import Image from "../components/Image";
+import Navigation from "../components/Navigation";
+import Thumbnail from "../components/Thumbnail";
 import Header from "../components/Header";
+import SingleImagePage from "./SingleImagePage";
 
 const SingleGalleryPage = (props) => {
+  const [showGallery, changeView] = useState(true);
   const dispatch = useDispatch();
+
+  console.log(props);
+  console.log('props.keyword: ', props.keyword);
 
   useEffect(() => {
     dispatch(props.fetchGallery());
   }, []);
+
+  const handleViewChange = id => {
+    id ?
+      dispatch(props.fetchImage({ id })) :
+      dispatch(props.clearImageData());
+    changeView(!showGallery);
+  };
 
   const takeNewestSorting = (id) => {
     const sorting = {
@@ -22,43 +35,54 @@ const SingleGalleryPage = (props) => {
       popular: false,
     };
     sorting[id] = true;
-    dispatch(props.fetchGallery({sorting}));
+    dispatch(props.fetchGallery({ sorting }));
   };
 
-  useEffect(() => {
-    console.log(props);
-  }, [props]);
+  const createGridTiles = (collection) => (
+    collection.map((image, index) => (
+        <Thumbnail
+          index={index}
+          key={uuidv4()}
+          id={image.id}
+          src={image.urls.regular}
+          likes={image.likes || undefined}
+          location={image.location && image.location.country || undefined}
+          downloads={image.downloads || undefined}
+          alt={image.alt_description}
+          description={image.description}
+          delayFactor={50 * index}
+          handleClickForDetails={id => handleViewChange(id)}
+        />
+      )
+    ));
 
   return (
     <>
-      <Header
-        title={"Cos tam cos tam"}
-        options={props.sorting}
-        takeNewestSorting={takeNewestSorting}
-      />
-      <InfiniteScroll
-        dataLength={props.data.length}
-        next={props.fetchGallery}
-        hasMore={true}
-      >
-        <Container>
-          {props.data.length > 0 ?
-            props.data.map((image, index) => {
-              return (
-                <Image
-                  key={uuidv4()}
-                  id={image.id}
-                  src={image.urls.regular}
-                  alt={image.alt_description}
-                  description={image.description}
-                  delayFactor={50 * index}
-                />
-              )
-            })
-            :
-            null}
-        </Container>
-      </InfiniteScroll>
+      <Navigation/>
+      {showGallery
+        ? (
+          <>
+            <Header
+              title={"Cos tam cos tam"}
+              options={props.sorting}
+              takeNewestSorting={takeNewestSorting}
+            />
+            <InfiniteScroll
+              dataLength={props.data.length}
+              next={props.fetchGallery}
+              hasMore={true}
+            >
+              <Container>
+                {
+                  props.data.length > 0
+                    ? createGridTiles(props.data)
+                    : null
+                }
+              </Container>
+            </InfiniteScroll>
+          </>) :
+        <SingleImagePage image={props.image} handleClose={id => handleViewChange()}/>
+      }
     </>
   );
 };
@@ -66,7 +90,7 @@ const SingleGalleryPage = (props) => {
 const Container = styled.div`
   width: 100%;
   display: grid;
-  
+
   @media (min-width: 960px) {
     grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
   }
@@ -74,6 +98,7 @@ const Container = styled.div`
 
 const mapStateToProps = state => ({
   data: state.singleGalleryPage.data,
+  image: state.singleGalleryPage.image,
   paging: state.singleGalleryPage.paging,
   sorting: state.singleGalleryPage.sorting,
   loading: state.singleGalleryPage.loading,
@@ -82,7 +107,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     fetchGallery: bindActionCreators(actions.fetchGallery, dispatch),
-    fetchGallerySuccess: bindActionCreators(actions.fetchGallerySuccess, dispatch)
+    fetchImage: bindActionCreators(actions.fetchImage, dispatch),
+    clearImageData: bindActionCreators(actions.clearImageData, dispatch),
   };
 };
 

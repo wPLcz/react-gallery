@@ -1,18 +1,29 @@
 import axios from "axios";
-import UNSPLASH_URL from "../config/unsplashURL";
+import { FETCH_GALLERY_URL, FETCH_IMAGE_URL } from "../config/unsplashURL";
 
 const { REACT_API_KEY } = process.env;
 
 const fetchGalleryPage = (params) => {
   return axios
-    .get(UNSPLASH_URL, {
+    .get(FETCH_GALLERY_URL, {
       params: {
         client_id: REACT_API_KEY,
-        query: 'usa',
+        query: 'right',
         ...params,
       },
     })
     .then(response => response.data);
 };
 
-export { fetchGalleryPage };
+const fetchImage = (params) => {
+  return axios
+    .get(`${FETCH_IMAGE_URL}/${params.id}`, {
+      params: {
+        client_id: REACT_API_KEY,
+      },
+    })
+    .then(response => response.data);
+};
+
+
+export { fetchGalleryPage, fetchImage };

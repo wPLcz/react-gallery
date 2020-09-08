@@ -1,11 +1,8 @@
 import { combineReducers } from 'redux';
-import app from './app';
-import landingPage from './landingPage';
 import singleGalleryPage from './singleGalleryPage';
+import landingPage from './landingPage';
 
 export default combineReducers({
-  // rootPath: (state = '') => state,
-  // intro,
-  // landingPage,
+  landingPage,
   singleGalleryPage,
 });

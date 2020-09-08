@@ -11,6 +11,12 @@ function* fetchGalleryAsync(params) {
   yield put(actions.fetchGallerySuccess(response));
 }
 
+function* fetchImageAsync(params) {
+  const response = yield call(api.fetchImage, {...params});
+  yield put(actions.fetchImageSuccess(response));
+}
+
 export default function* all() {
   yield takeEvery("FETCH_GALLERY", executeAppCallAsync(fetchGalleryAsync));
+  yield takeEvery("FETCH_IMAGE", executeAppCallAsync(fetchImageAsync));
 }
