@@ -15,7 +15,7 @@ const SingleGalleryPage = (props) => {
   const dispatch = useDispatch();
 
   console.log(props);
-  console.log('props.keyword: ', props.keyword);
+  console.log(props.keyword);
 
   useEffect(() => {
     dispatch(props.fetchGallery());
