@@ -5,7 +5,6 @@ import { executeAppCallAsync} from "./helpers";
 
 function* fetchCollectionsAsync() {
   const response = yield call(api.fetchCollections);
-  yield console.log(response);
   yield put(actions.fetchCollectionsSuccess(response));
 }
 

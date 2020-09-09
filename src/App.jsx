@@ -1,25 +1,21 @@
-import React, {Suspense, lazy} from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Loader from "./components/common/Loader";
 
-const LazyLandingPage = lazy(() => import('./pages/LandingPage'));
-const LazySingleGalleryPage = lazy(() => import('./pages/SingleGalleryPage'));
+import LandingPage from "./pages/LandingPage";
+import SingleGalleryPage from "./pages/SingleGalleryPage";
 
 const App = () => {
   return (
     <Router>
       <Switch>
-        <Suspense fallback={<Loader/>}>
         <Route
           path="/gallery"
-          exact={true}
-          render={props => <LazySingleGalleryPage {...props}/>}
+          render={props => <SingleGalleryPage other={props}/>}
         />
         <Route
           path="/"
-          render={props => <LazyLandingPage {...props}/>}
+          render={props => <LandingPage other={props}/>}
           />
-        </Suspense>
       </Switch>
     </Router>
   );

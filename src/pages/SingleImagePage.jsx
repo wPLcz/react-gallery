@@ -1,22 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { TweenMax } from "gsap";
-import { FacebookProvider, Share } from "react-facebook";
+import SocialMedia from "../components/SocialMedia";
 
 const SingleImagePage = (props) => {
+  const [loaded, setStatus] = useState(false);
   const singleImageContainer = useRef(null);
 
   useEffect(() => {
-    TweenMax.from(singleImageContainer.current, 1, {
-      opacity: 0,
-    }, 1.5);
-  }, []);
+    if (loaded) {
+      TweenMax.to(singleImageContainer.current, 2, {
+        opacity: 1,
+      }, 1.5);
+    }
+  }, [loaded]);
 
   return (
     <Container ref={singleImageContainer}>
       <ImgContainer>
         <Close onClick={props.handleClose}/>
         <Img
+          onLoad={() => setStatus(true)}
           src={props.image && props.image.urls && props.image.urls.full}
           alt={props.image && props.image.alt_description}
         />
@@ -27,7 +31,8 @@ const SingleImagePage = (props) => {
           {props.image && props.image.downloads ? <li>Downloads: {props.image.downloads}</li> : null}
           {props.image && props.image.likes ? <li>Likes number: {props.image.likes}</li> : null}
         </ListContainer>
-      </ImgContainer>
+        <SocialMedia/>
+      </ImgContainer> :
     </Container>
   );
 };
@@ -149,6 +154,7 @@ const ListContainer = styled.ul`
 `;
 
 const Container = styled.div`
+    opacity: 0;
     display: grid;
     justify-content: center;
     align-content: center;

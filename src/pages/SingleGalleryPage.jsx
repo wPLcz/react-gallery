@@ -14,11 +14,8 @@ const SingleGalleryPage = (props) => {
   const [showGallery, changeView] = useState(true);
   const dispatch = useDispatch();
 
-  console.log(props);
-  console.log(props.keyword);
-
   useEffect(() => {
-    dispatch(props.fetchGallery());
+    dispatch(props.fetchGallery({keyword: props.other && props.other.location.state.keyword}));
   }, []);
 
   const handleViewChange = id => {
@@ -29,6 +26,7 @@ const SingleGalleryPage = (props) => {
   };
 
   const takeNewestSorting = (id) => {
+    props.clearGalleryData();
     const sorting = {
       latest: false,
       oldest: false,
@@ -58,14 +56,17 @@ const SingleGalleryPage = (props) => {
 
   return (
     <>
-      <Navigation/>
+      <Navigation
+        clearGalleryData={() => props.clearGalleryData()}
+      />
       {showGallery
         ? (
           <>
             <Header
-              title={"Cos tam cos tam"}
+              title={props.header}
               options={props.sorting}
               takeNewestSorting={takeNewestSorting}
+
             />
             <InfiniteScroll
               dataLength={props.data.length}
@@ -98,6 +99,7 @@ const Container = styled.div`
 
 const mapStateToProps = state => ({
   data: state.singleGalleryPage.data,
+  header: state.singleGalleryPage.header,
   image: state.singleGalleryPage.image,
   paging: state.singleGalleryPage.paging,
   sorting: state.singleGalleryPage.sorting,
@@ -109,6 +111,7 @@ const mapDispatchToProps = dispatch => {
     fetchGallery: bindActionCreators(actions.fetchGallery, dispatch),
     fetchImage: bindActionCreators(actions.fetchImage, dispatch),
     clearImageData: bindActionCreators(actions.clearImageData, dispatch),
+    clearGalleryData: bindActionCreators(actions.clearGalleryData, dispatch),
   };
 };
 

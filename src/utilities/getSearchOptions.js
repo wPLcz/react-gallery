@@ -9,6 +9,7 @@ export default (params) => {
     query.order_by = 'latest';
   }
 
+  query.query = params.header;
   query.page = params.paging.page;
   query.per_page = params.paging.pageSize;
 

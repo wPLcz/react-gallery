@@ -52,12 +52,17 @@ const Figcaption = styled.figcaption`
 `;
 
 const Figure = styled.figure`
+    max-height: 300px;
+    display: grid;
     position: relative;
-    box-shadow: 0px 0px 5px 1px rgba(87,86,87,1);
     border-radius: 6px;
     overflow: hidden;
     cursor: pointer;
-    max-height: 300px;
+    justify-content: center;
+    align-content: center;
+    background-color: black;
+    box-shadow: 0px 0px 5px 1px rgba(87,86,87,1);
+    
     
     &:hover ${Img} {
       transform: scale(1.25);

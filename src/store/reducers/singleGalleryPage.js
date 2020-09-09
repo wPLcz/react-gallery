@@ -5,6 +5,7 @@ export const initialState = {
     oldest: false,
     popular: false,
   },
+  header: '',
   paging: {
     pageSize: 30,
     page: 0,
@@ -14,7 +15,6 @@ export const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case "FETCH_GALLERY": {
       const paging = { ...state.paging, ...action.paging };
@@ -24,6 +24,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
+        header: action.keyword || state.header,
         paging,
         sorting: action.sorting || sorting,
       };
@@ -52,6 +53,11 @@ export default (state = initialState, action) => {
         ...state,
         image: {},
       };
+    case "CLEAR_GALLERY_DATA":
+      return {
+        ...state,
+        data: [],
+      };
     default:
       return state;
   }
@@ -64,4 +70,5 @@ export const actions = {
   fetchImage: params => ({ type: "FETCH_IMAGE", ...params }),
   fetchImageSuccess: params => ({ type: "FETCH_IMAGE_SUCCESS", params }),
   clearImageData: params => ({ type: "CLEAR_IMAGE_DATA", ...params }),
+  clearGalleryData: params => ({ type: "CLEAR_GALLERY_DATA", ...params }),
 };

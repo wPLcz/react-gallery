@@ -11,7 +11,6 @@ export default (state = initialState, action) => {
       };
     }
     case "FETCH_COLLECTIONS_SUCCESS":
-      console.log('ACTION: ', action.params);
       const data = [ ...action.params];
       return {
         state,

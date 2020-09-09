@@ -6,7 +6,7 @@ import getSearchOptions from "../utilities/getSearchOptions";
 
 function* fetchGalleryAsync(params) {
   const state = yield select(state => state.singleGalleryPage);
-  const query = getSearchOptions({...params, ...state})
+  const query = getSearchOptions({...params, ...state});
   const response = yield call(api.fetchGalleryPage, {...query});
   yield put(actions.fetchGallerySuccess(response));
 }

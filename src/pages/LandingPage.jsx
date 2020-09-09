@@ -15,7 +15,10 @@ const LandingPage = props => {
 
   const generateTagLinks = tagsCollection => (
     tagsCollection.map(tag => (
-      <StyledLink keyword={tag.title} to="/gallery" key={uuidv4()}>
+      <StyledLink
+        to={{ pathname: '/gallery', state: { keyword: tag.title} }}
+        key={uuidv4()}
+      >
         <Tag>
           {tag.title}
         </Tag>

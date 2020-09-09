@@ -51,7 +51,6 @@ module.exports = {
       }
     ]
   },
-  alias: { 'react-dom': '@hot-loader/react-dom'  },
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
