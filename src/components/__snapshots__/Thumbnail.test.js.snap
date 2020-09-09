@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly  1`] = `
+<figure
+  className="sc-hKFyIo imHzss"
+  onClick={[Function]}
+>
+  <img
+    alt=""
+    className="sc-bdnylx kVcZjp"
+    src=""
+  />
+  <figcaption
+    className="sc-dlnjPT dXIDcK"
+  >
+    <ul
+      className="sc-gtssRu olpFb"
+    />
+  </figcaption>
+</figure>
+`;
+
+exports[`renders correctly when there are no items 1`] = `
+<figure
+  className="sc-hKFyIo imHzss"
+  onClick={[Function]}
+>
+  <img
+    alt=""
+    className="sc-bdnylx kVcZjp"
+    src=""
+  />
+  <figcaption
+    className="sc-dlnjPT dXIDcK"
+  >
+    <ul
+      className="sc-gtssRu olpFb"
+    />
+  </figcaption>
+</figure>
+`;

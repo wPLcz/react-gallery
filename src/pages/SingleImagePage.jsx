@@ -9,7 +9,7 @@ const SingleImagePage = (props) => {
 
   useEffect(() => {
     if (loaded) {
-      TweenMax.to(singleImageContainer.current, 2, {
+      TweenMax.to(singleImageContainer.current, 1.5, {
         opacity: 1,
       }, 1.5);
     }
@@ -32,7 +32,7 @@ const SingleImagePage = (props) => {
           {props.image && props.image.likes ? <li>Likes number: {props.image.likes}</li> : null}
         </ListContainer>
         <SocialMedia/>
-      </ImgContainer> :
+      </ImgContainer>
     </Container>
   );
 };

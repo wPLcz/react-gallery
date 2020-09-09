@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { v4 as uuidv4 } from 'uuid';
 import { actions } from '../store/reducers/singleGalleryPage';
-import Navigation from "../components/Navigation";
+import Navigation from "../containers/Navigation";
 import Thumbnail from "../components/Thumbnail";
 import Header from "../components/Header";
 import SingleImagePage from "./SingleImagePage";

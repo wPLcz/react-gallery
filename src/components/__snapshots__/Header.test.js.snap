@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly passing title 1`] = `
+<section
+  className="sc-dlnjPT eIaXWU"
+>
+  <h2
+    className="sc-gtssRu lmdLgS"
+  >
+    Mocked Title
+  </h2>
+  <div
+    className="sc-hKFyIo exTVht"
+  />
+</section>
+`;
+
+exports[`renders correctly when there are no items 1`] = `
+<section
+  className="sc-dlnjPT eIaXWU"
+>
+  <h2
+    className="sc-gtssRu lmdLgS"
+  >
+    
+  </h2>
+  <div
+    className="sc-hKFyIo exTVht"
+  />
+</section>
+`;
