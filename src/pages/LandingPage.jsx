@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -8,7 +8,6 @@ import { actions } from "../store/reducers/landingPage";
 
 const LandingPage = props => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(props.fetchCollections());
   }, []);

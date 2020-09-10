@@ -10,11 +10,13 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "index.js"
+    filename: "script.js",
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -27,26 +29,6 @@ module.exports = {
           }
         },
       },
-      {
-        test: /\.(ttf|eot|woff|woff2)$/,
-        use: {
-          loader: "file-loader",
-          options: {
-            name: "fonts/[name].[ext]",
-          },
-        },
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg|ico)$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              outputPath: "assets/"
-            }
-          }
-        ]
-      }
     ]
   },
   optimization: {
