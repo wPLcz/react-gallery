@@ -29,7 +29,6 @@ const LandingPage = props => {
   const generateSections = data => (
     data.map(section => (
       <Article key={uuidv4()}>
-        <Loader/>
         <Header>{section.title}</Header>
         {section.tags && generateTagLinks(section.tags)}
         <Img src={section.cover_photo.urls.raw} alt={section.cover_photo.alt_description}/>

@@ -1,12 +1,13 @@
 import React, {Suspense} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import Loader from "./components/Loader";
 import LandingPage from "./pages/LandingPage";
 const AsyncGallery = React.lazy(() => import('./pages/SingleGalleryPage'));
 
 const App = () => {
   return (
-    <Suspense fallback={<h1>asdeasd</h1>}>
+    <Suspense fallback={<Loader/>}>
     <Router>
       <Switch>
         <Route
