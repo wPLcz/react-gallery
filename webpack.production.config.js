@@ -6,8 +6,6 @@ const path = require("path");
 module.exports = {
   mode: "production",
   entry: [
-    "core-js/modules/es6.promise",
-    "core-js/modules/es6.array.iterator",
     path.join(__dirname, "src/index.js"),
   ],
   output: {
