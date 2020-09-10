@@ -8,7 +8,6 @@ const fetchGalleryPage = (params) => {
     .get(FETCH_GALLERY_URL, {
       params: {
         client_id: REACT_API_KEY,
-        query: 'right',
         ...params,
       },
     })
