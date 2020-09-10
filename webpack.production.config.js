@@ -10,6 +10,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, "/dist"),
+    chunkFilename: '[name].bundle.js',
     filename: "script.js",
     publicPath: '/'
   },
@@ -34,7 +35,12 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
+    splitChunks: {
+      chunks: 'all',
+      maxSize: 220,
+    },
   },
+
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({

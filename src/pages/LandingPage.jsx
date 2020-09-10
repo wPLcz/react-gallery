@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { actions } from "../store/reducers/landingPage";
+import Loader from "../components/Loader";
 
 const LandingPage = props => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const LandingPage = props => {
   const generateSections = data => (
     data.map(section => (
       <Article key={uuidv4()}>
+        <Loader/>
         <Header>{section.title}</Header>
         {section.tags && generateTagLinks(section.tags)}
         <Img src={section.cover_photo.urls.raw} alt={section.cover_photo.alt_description}/>
