@@ -7,8 +7,6 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: [
-    "core-js/modules/es6.promise",
-    "core-js/modules/es6.array.iterator",
     path.join(__dirname, "src/index.js"),
   ],
   output: {
@@ -66,7 +64,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
-      template: "./index.html",
+      template: path.join('./index.html'),
       filename: "index.html"
     }),
   ],
